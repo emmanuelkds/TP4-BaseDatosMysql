@@ -1,0 +1,522 @@
+{
+  "proveedores": [
+    {
+      "descripcion": "Listar todos los proveedores",
+      "metodo": "GET",
+      "url": "http://localhost:3000/proveedores",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Obtener proveedor por ID",
+      "metodo": "GET",
+      "url": "http://localhost:3000/proveedores/1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Proveedor inexistente devuelve 404",
+      "metodo": "GET",
+      "url": "http://localhost:3000/proveedores/999",
+      "body": null,
+      "respuesta_esperada": 404
+    },
+    {
+      "descripcion": "Crear proveedor",
+      "metodo": "POST",
+      "url": "http://localhost:3000/proveedores",
+      "body": {
+        "nombre": "PepsiCo",
+        "cuit": "30-99999999-9",
+        "telefono": "1145559999",
+        "email": "info@pepsi.com",
+        "direccion": "Av. Siempreviva 742"
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar proveedor",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/proveedores/1",
+      "body": {
+        "nombre": "Coca-Cola FEMSA",
+        "cuit": "30-12345678-1",
+        "telefono": "1145550000",
+        "email": "nuevo@coca.com",
+        "direccion": "Av. Rivadavia 1500"
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar proveedor",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/proveedores/3",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "categorias": [
+    {
+      "descripcion": "Listar categorías",
+      "metodo": "GET",
+      "url": "http://localhost:3000/categorias",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear categoría",
+      "metodo": "POST",
+      "url": "http://localhost:3000/categorias",
+      "body": {
+        "nombre": "Lácteos",
+        "descripcion": "Leches, yogures y quesos"
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar categoría",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/categorias/1",
+      "body": {
+        "nombre": "Bebidas sin alcohol",
+        "descripcion": "Gaseosas, aguas y jugos"
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar categoría",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/categorias/4",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "productos": [
+    {
+      "descripcion": "Listar productos con JOIN (categoría y proveedor)",
+      "metodo": "GET",
+      "url": "http://localhost:3000/productos",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Filtrar productos por categoría Bebidas",
+      "metodo": "GET",
+      "url": "http://localhost:3000/productos?categoria=Bebidas",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Filtrar productos por precio máximo",
+      "metodo": "GET",
+      "url": "http://localhost:3000/productos?precio_max=2000",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Agregación: stock total por categoría",
+      "metodo": "GET",
+      "url": "http://localhost:3000/productos/stock-por-categoria",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear producto",
+      "metodo": "POST",
+      "url": "http://localhost:3000/productos",
+      "body": {
+        "nombre": "Pepsi 2.25L",
+        "precio": 3200,
+        "stock": 80,
+        "id_categoria": 1,
+        "id_proveedor": 1
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar producto",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/productos/1",
+      "body": {
+        "nombre": "Coca-Cola 2.25L",
+        "precio": 3800,
+        "stock": 120,
+        "id_categoria": 1,
+        "id_proveedor": 1
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar producto",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/productos/6",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "clientes": [
+    {
+      "descripcion": "Listar clientes",
+      "metodo": "GET",
+      "url": "http://localhost:3000/clientes",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Obtener cliente por ID",
+      "metodo": "GET",
+      "url": "http://localhost:3000/clientes/1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Agregación: total facturado por cliente",
+      "metodo": "GET",
+      "url": "http://localhost:3000/clientes/total-por-cliente",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear cliente",
+      "metodo": "POST",
+      "url": "http://localhost:3000/clientes",
+      "body": {
+        "nombre": "Kiosco Central",
+        "cuit": "20-33333333-3",
+        "telefono": "1144443333",
+        "email": "kiosco@mail.com",
+        "direccion": "Av. Callao 800"
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar cliente",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/clientes/1",
+      "body": {
+        "nombre": "Supermercado El Sol S.A.",
+        "cuit": "20-11111111-1",
+        "telefono": "1144441100",
+        "email": "compras@elsol.com",
+        "direccion": "Av. Corrientes 600"
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar cliente",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/clientes/3",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "empleados": [
+    {
+      "descripcion": "Listar empleados",
+      "metodo": "GET",
+      "url": "http://localhost:3000/empleados",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Obtener empleado por ID",
+      "metodo": "GET",
+      "url": "http://localhost:3000/empleados/1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Agregación: salario promedio por puesto",
+      "metodo": "GET",
+      "url": "http://localhost:3000/empleados/salarios-por-puesto",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear empleado",
+      "metodo": "POST",
+      "url": "http://localhost:3000/empleados",
+      "body": {
+        "nombre": "Carlos",
+        "apellido": "López",
+        "puesto": "Repartidor",
+        "salario": 780000,
+        "fecha_ingreso": "2024-01-15"
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar empleado",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/empleados/1",
+      "body": {
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "puesto": "Vendedor Senior",
+        "salario": 950000,
+        "fecha_ingreso": "2023-03-01"
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar empleado",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/empleados/3",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "pedidos": [
+    {
+      "descripcion": "Listar pedidos con JOIN (cliente y empleado)",
+      "metodo": "GET",
+      "url": "http://localhost:3000/pedidos",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Filtrar pedidos por estado",
+      "metodo": "GET",
+      "url": "http://localhost:3000/pedidos?estado=entregado",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Filtrar pedidos por cliente",
+      "metodo": "GET",
+      "url": "http://localhost:3000/pedidos?id_cliente=1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Obtener pedido con su detalle completo",
+      "metodo": "GET",
+      "url": "http://localhost:3000/pedidos/1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Agregación: pedidos totales por mes",
+      "metodo": "GET",
+      "url": "http://localhost:3000/pedidos/total-por-mes",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear pedido",
+      "metodo": "POST",
+      "url": "http://localhost:3000/pedidos",
+      "body": {
+        "fecha": "2025-06-10",
+        "id_cliente": 1,
+        "id_empleado": 1,
+        "estado": "pendiente"
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Agregar producto al detalle del pedido",
+      "metodo": "POST",
+      "url": "http://localhost:3000/pedidos/1/detalle",
+      "body": {
+        "id_producto": 2,
+        "cantidad": 5,
+        "precio_unitario": 1200
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar pedido",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/pedidos/2",
+      "body": {
+        "fecha": "2025-06-05",
+        "id_cliente": 2,
+        "id_empleado": 2,
+        "estado": "entregado"
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar pedido",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/pedidos/3",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "facturas": [
+    {
+      "descripcion": "Listar facturas con JOIN (cliente)",
+      "metodo": "GET",
+      "url": "http://localhost:3000/facturas",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Obtener factura por ID",
+      "metodo": "GET",
+      "url": "http://localhost:3000/facturas/1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Agregación: IVA recaudado por mes",
+      "metodo": "GET",
+      "url": "http://localhost:3000/facturas/iva-por-mes",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear factura",
+      "metodo": "POST",
+      "url": "http://localhost:3000/facturas",
+      "body": {
+        "numero": "A-0001-00000002",
+        "fecha": "2025-06-05",
+        "subtotal": 21000,
+        "iva": 4410,
+        "total": 25410,
+        "id_pedido": 2
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar factura",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/facturas/1",
+      "body": {
+        "numero": "A-0001-00000001",
+        "fecha": "2025-06-01",
+        "subtotal": 53000,
+        "iva": 11130,
+        "total": 64130,
+        "id_pedido": 1
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar factura",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/facturas/2",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "companias": [
+    {
+      "descripcion": "Listar compañías de envíos",
+      "metodo": "GET",
+      "url": "http://localhost:3000/companias",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Obtener compañía por ID",
+      "metodo": "GET",
+      "url": "http://localhost:3000/companias/1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Agregación: cantidad de envíos por compañía",
+      "metodo": "GET",
+      "url": "http://localhost:3000/companias/envios-por-compania",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear compañía de envíos",
+      "metodo": "POST",
+      "url": "http://localhost:3000/companias",
+      "body": {
+        "nombre": "OCA",
+        "telefono": "0800-999-9999",
+        "costo_base": 3000
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar compañía",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/companias/1",
+      "body": {
+        "nombre": "Andreani S.A.",
+        "telefono": "0800-333-3333",
+        "costo_base": 2700
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar compañía",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/companias/3",
+      "body": null,
+      "respuesta_esperada": 200
+    }
+  ],
+
+  "envios": [
+    {
+      "descripcion": "Listar envíos con JOIN (compañía)",
+      "metodo": "GET",
+      "url": "http://localhost:3000/envios",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Obtener envío por ID",
+      "metodo": "GET",
+      "url": "http://localhost:3000/envios/1",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Crear envío",
+      "metodo": "POST",
+      "url": "http://localhost:3000/envios",
+      "body": {
+        "id_pedido": 2,
+        "id_compania": 1,
+        "direccion": "Calle Falsa 123",
+        "fecha_envio": "2025-06-07",
+        "estado": "preparando"
+      },
+      "respuesta_esperada": 201
+    },
+    {
+      "descripcion": "Actualizar envío",
+      "metodo": "PUT",
+      "url": "http://localhost:3000/envios/1",
+      "body": {
+        "id_pedido": 1,
+        "id_compania": 1,
+        "direccion": "Av. Corrientes 500",
+        "fecha_envio": "2025-06-02",
+        "estado": "entregado"
+      },
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Eliminar envío",
+      "metodo": "DELETE",
+      "url": "http://localhost:3000/envios/3",
+      "body": null,
+      "respuesta_esperada": 200
+    },
+    {
+      "descripcion": "Envío inexistente devuelve 404",
+      "metodo": "GET",
+      "url": "http://localhost:3000/envios/999",
+      "body": null,
+      "respuesta_esperada": 404
+    }
+  ]
+}
