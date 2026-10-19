@@ -2,110 +2,139 @@ DROP DATABASE IF EXISTS distribuidora;
 CREATE DATABASE distribuidora CHARACTER SET utf8mb4;
 USE distribuidora;
 
+-- ============================================
 -- 1. PROVEEDORES
+-- ============================================
 CREATE TABLE proveedores (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   cuit VARCHAR(20) NOT NULL UNIQUE,
   telefono VARCHAR(30),
-  email VARCHAR(100),
-  direccion VARCHAR(200)
+  email VARCHAR(100) UNIQUE,
+  direccion VARCHAR(200),
+  activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
+-- ============================================
 -- 2. CATEGORIAS
+-- ============================================
 CREATE TABLE categorias (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(80) NOT NULL UNIQUE,
   descripcion VARCHAR(200)
 );
 
+-- ============================================
 -- 3. PRODUCTOS
+-- ============================================
 CREATE TABLE productos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
-  precio DECIMAL(10,2) NOT NULL,
-  stock INT NOT NULL DEFAULT 0,
+  precio DECIMAL(10,2) NOT NULL CHECK (precio >= 0),
+  stock INT NOT NULL DEFAULT 0 CHECK (stock >= 0),
   id_categoria INT,
   id_proveedor INT,
+  activo BOOLEAN NOT NULL DEFAULT TRUE,
   FOREIGN KEY (id_categoria) REFERENCES categorias(id),
   FOREIGN KEY (id_proveedor) REFERENCES proveedores(id)
 );
 
+-- ============================================
 -- 4. CLIENTES
+-- ============================================
 CREATE TABLE clientes (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   cuit VARCHAR(20) UNIQUE,
   telefono VARCHAR(30),
-  email VARCHAR(100),
-  direccion VARCHAR(200)
+  email VARCHAR(100) UNIQUE,
+  direccion VARCHAR(200),
+  activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
+-- ============================================
 -- 5. EMPLEADOS
+-- ============================================
 CREATE TABLE empleados (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   apellido VARCHAR(100) NOT NULL,
   puesto VARCHAR(60) NOT NULL,
-  salario DECIMAL(10,2) NOT NULL,
-  fecha_ingreso DATE NOT NULL
+  salario DECIMAL(10,2) NOT NULL CHECK (salario >= 0),
+  fecha_ingreso DATE NOT NULL,
+  activo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
+-- ============================================
 -- 6. COMPANIAS DE ENVIOS
+-- ============================================
 CREATE TABLE companias_envios (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nombre VARCHAR(100) NOT NULL,
   telefono VARCHAR(30),
-  costo_base DECIMAL(10,2) NOT NULL
+  costo_base DECIMAL(10,2) NOT NULL CHECK (costo_base >= 0)
 );
 
+-- ============================================
 -- 7. PEDIDOS
+-- ============================================
 CREATE TABLE pedidos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   fecha DATE NOT NULL,
   id_cliente INT NOT NULL,
   id_empleado INT NOT NULL,
-  estado VARCHAR(30) NOT NULL DEFAULT 'pendiente',
+  estado ENUM('pendiente','en preparacion','en camino','entregado','cancelado')
+         NOT NULL DEFAULT 'pendiente',
   FOREIGN KEY (id_cliente) REFERENCES clientes(id),
   FOREIGN KEY (id_empleado) REFERENCES empleados(id)
 );
 
+-- ============================================
 -- 8. DETALLE DE PEDIDO
+-- ============================================
 CREATE TABLE detalle_pedido (
   id INT AUTO_INCREMENT PRIMARY KEY,
   id_pedido INT NOT NULL,
   id_producto INT NOT NULL,
-  cantidad INT NOT NULL,
-  precio_unitario DECIMAL(10,2) NOT NULL,
+  cantidad INT NOT NULL CHECK (cantidad > 0),
+  precio_unitario DECIMAL(10,2) NOT NULL CHECK (precio_unitario >= 0),
+  UNIQUE KEY uk_pedido_producto (id_pedido, id_producto),
   FOREIGN KEY (id_pedido) REFERENCES pedidos(id) ON DELETE CASCADE,
   FOREIGN KEY (id_producto) REFERENCES productos(id)
 );
 
--- 9. FACTURAS
+-- ============================================
+-- 9. FACTURAS (1 pedido -> 1 factura)
+-- ============================================
 CREATE TABLE facturas (
   id INT AUTO_INCREMENT PRIMARY KEY,
   numero VARCHAR(30) NOT NULL UNIQUE,
   fecha DATE NOT NULL,
-  subtotal DECIMAL(10,2) NOT NULL,
-  iva DECIMAL(10,2) NOT NULL,
-  total DECIMAL(10,2) NOT NULL,
-  id_pedido INT NOT NULL,
+  subtotal DECIMAL(10,2) NOT NULL CHECK (subtotal >= 0),
+  iva DECIMAL(10,2) NOT NULL CHECK (iva >= 0),
+  total DECIMAL(10,2) NOT NULL CHECK (total >= 0),
+  id_pedido INT NOT NULL UNIQUE,
   FOREIGN KEY (id_pedido) REFERENCES pedidos(id)
 );
 
--- 10. ENVIOS
+-- ============================================
+-- 10. ENVIOS (1 pedido -> 1 envio)
+-- ============================================
 CREATE TABLE envios (
   id INT AUTO_INCREMENT PRIMARY KEY,
-  id_pedido INT NOT NULL,
+  id_pedido INT NOT NULL UNIQUE,
   id_compania INT NOT NULL,
   direccion VARCHAR(200) NOT NULL,
   fecha_envio DATE,
-  estado VARCHAR(30) DEFAULT 'preparando',
+  estado ENUM('preparando','en camino','entregado','cancelado')
+         NOT NULL DEFAULT 'preparando',
   FOREIGN KEY (id_pedido) REFERENCES pedidos(id),
   FOREIGN KEY (id_compania) REFERENCES companias_envios(id)
 );
 
--- ============ DATOS DE EJEMPLO ============
+-- ============================================
+-- DATOS DE EJEMPLO
+-- ============================================
 
 INSERT INTO proveedores (nombre, cuit, telefono, email, direccion) VALUES
 ('Coca-Cola FEMSA', '30-12345678-1', '1145551111', 'ventas@coca.com', 'Av. Rivadavia 1000'),

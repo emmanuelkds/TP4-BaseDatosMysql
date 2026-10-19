@@ -1,7 +1,7 @@
 import { pool } from "../config/db.js";
 
 export const findAll = async () => {
-  const [rows] = await pool.query("SELECT * FROM proveedores");
+  const [rows] = await pool.query("SELECT * FROM proveedores WHERE activo = 1");
   return rows;
 };
 
@@ -28,6 +28,7 @@ export const update = async (id, data) => {
   return { id, ...data };
 };
 
+// BAJA LÓGICA
 export const remove = async (id) => {
-  await pool.query("DELETE FROM proveedores WHERE id = ?", [id]);
+  await pool.query("UPDATE proveedores SET activo = 0 WHERE id = ?", [id]);
 };

@@ -1,7 +1,7 @@
 import { pool } from "../config/db.js";
 
 export const findAll = async () => {
-  const [rows] = await pool.query("SELECT * FROM clientes");
+  const [rows] = await pool.query("SELECT * FROM clientes WHERE activo = 1");
   return rows;
 };
 
@@ -28,11 +28,11 @@ export const update = async (id, data) => {
   return { id, ...data };
 };
 
+// BAJA LÓGICA
 export const remove = async (id) => {
-  await pool.query("DELETE FROM clientes WHERE id=?", [id]);
+  await pool.query("UPDATE clientes SET activo = 0 WHERE id = ?", [id]);
 };
 
-// AGREGACIÓN: total facturado por cliente
 export const totalPorCliente = async () => {
   const [rows] = await pool.query(
     `SELECT c.id, c.nombre,
@@ -41,6 +41,7 @@ export const totalPorCliente = async () => {
      FROM clientes c
      LEFT JOIN pedidos p ON p.id_cliente = c.id
      LEFT JOIN facturas f ON f.id_pedido = p.id
+     WHERE c.activo = 1
      GROUP BY c.id, c.nombre
      ORDER BY total_facturado DESC`
   );

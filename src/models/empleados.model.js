@@ -1,7 +1,7 @@
 import { pool } from "../config/db.js";
 
 export const findAll = async () => {
-  const [rows] = await pool.query("SELECT * FROM empleados");
+  const [rows] = await pool.query("SELECT * FROM empleados WHERE activo = 1");
   return rows;
 };
 
@@ -28,11 +28,11 @@ export const update = async (id, data) => {
   return { id, ...data };
 };
 
+// BAJA LÓGICA
 export const remove = async (id) => {
-  await pool.query("DELETE FROM empleados WHERE id=?", [id]);
+  await pool.query("UPDATE empleados SET activo = 0 WHERE id = ?", [id]);
 };
 
-// AGREGACIÓN: salario promedio por puesto
 export const salarioPorPuesto = async () => {
   const [rows] = await pool.query(
     `SELECT puesto,
@@ -40,6 +40,7 @@ export const salarioPorPuesto = async () => {
             AVG(salario) AS salario_promedio,
             MAX(salario) AS salario_maximo
      FROM empleados
+     WHERE activo = 1
      GROUP BY puesto`
   );
   return rows;

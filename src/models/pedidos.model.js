@@ -13,7 +13,7 @@ export const findAll = async (filtros = {}) => {
   `;
   const params = [];
   if (filtros.estado) { sql += " AND p.estado = ?"; params.push(filtros.estado); }
-  if (filtros.id_cliente) { sql += " AND p.id_cliente = ?"; params.push(filtros.id_cliente); }
+  if (filtros.id_cliente) { sql += " AND p.id_cliente = ?"; params.push(Number(filtros.id_cliente)); }
   sql += " ORDER BY p.fecha DESC";
   const [rows] = await pool.query(sql, params);
   return rows;
@@ -84,7 +84,7 @@ export const totalPorMes = async () => {
     `SELECT DATE_FORMAT(fecha, '%Y-%m') AS mes,
             COUNT(*) AS cantidad_pedidos
      FROM pedidos
-     GROUP BY mes
+     GROUP BY DATE_FORMAT(fecha, '%Y-%m')
      ORDER BY mes DESC`
   );
   return rows;

@@ -1,0 +1,794 @@
+{
+  "info": {
+    "name": "Distribuidora API",
+    "description": "Colección de pruebas para la API REST de la distribuidora",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Proveedores",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/proveedores",
+              "host": ["http://localhost:3000"],
+              "path": ["proveedores"]
+            }
+          }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/proveedores/1",
+              "host": ["http://localhost:3000"],
+              "path": ["proveedores", "1"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"PepsiCo\",\"cuit\":\"30-99999999-9\",\"telefono\":\"1145559999\",\"email\":\"info@pepsi.com\",\"direccion\":\"Av. Siempreviva 742\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/proveedores",
+              "host": ["http://localhost:3000"],
+              "path": ["proveedores"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Coca-Cola FEMSA\",\"cuit\":\"30-12345678-1\",\"telefono\":\"1145550000\",\"email\":\"nuevo@coca.com\",\"direccion\":\"Av. Rivadavia 1500\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/proveedores/1",
+              "host": ["http://localhost:3000"],
+              "path": ["proveedores", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/proveedores/3",
+              "host": ["http://localhost:3000"],
+              "path": ["proveedores", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Categorias",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/categorias",
+              "host": ["http://localhost:3000"],
+              "path": ["categorias"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Lácteos\",\"descripcion\":\"Leches, yogures y quesos\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/categorias",
+              "host": ["http://localhost:3000"],
+              "path": ["categorias"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Bebidas sin alcohol\",\"descripcion\":\"Gaseosas, aguas y jugos\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/categorias/1",
+              "host": ["http://localhost:3000"],
+              "path": ["categorias", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/categorias/4",
+              "host": ["http://localhost:3000"],
+              "path": ["categorias", "4"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Productos",
+      "item": [
+        {
+          "name": "Listar con JOIN",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/productos",
+              "host": ["http://localhost:3000"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "Filtrar por categoría",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/productos?categoria=Bebidas",
+              "host": ["http://localhost:3000"],
+              "path": ["productos"],
+              "query": [{ "key": "categoria", "value": "Bebidas" }]
+            }
+          }
+        },
+        {
+          "name": "Filtrar por precio máximo",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/productos?precio_max=2000",
+              "host": ["http://localhost:3000"],
+              "path": ["productos"],
+              "query": [{ "key": "precio_max", "value": "2000" }]
+            }
+          }
+        },
+        {
+          "name": "Stock por categoría",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/productos/stock-por-categoria",
+              "host": ["http://localhost:3000"],
+              "path": ["productos", "stock-por-categoria"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Pepsi 2.25L\",\"precio\":3200,\"stock\":80,\"id_categoria\":1,\"id_proveedor\":1}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/productos",
+              "host": ["http://localhost:3000"],
+              "path": ["productos"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Coca-Cola 2.25L\",\"precio\":3800,\"stock\":120,\"id_categoria\":1,\"id_proveedor\":1}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/productos/1",
+              "host": ["http://localhost:3000"],
+              "path": ["productos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/productos/6",
+              "host": ["http://localhost:3000"],
+              "path": ["productos", "6"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/clientes",
+              "host": ["http://localhost:3000"],
+              "path": ["clientes"]
+            }
+          }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/clientes/1",
+              "host": ["http://localhost:3000"],
+              "path": ["clientes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Total por cliente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/clientes/total-por-cliente",
+              "host": ["http://localhost:3000"],
+              "path": ["clientes", "total-por-cliente"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Kiosco Central\",\"cuit\":\"20-33333333-3\",\"telefono\":\"1144443333\",\"email\":\"kiosco@mail.com\",\"direccion\":\"Av. Callao 800\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/clientes",
+              "host": ["http://localhost:3000"],
+              "path": ["clientes"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Supermercado El Sol S.A.\",\"cuit\":\"20-11111111-1\",\"telefono\":\"1144441100\",\"email\":\"compras@elsol.com\",\"direccion\":\"Av. Corrientes 600\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/clientes/1",
+              "host": ["http://localhost:3000"],
+              "path": ["clientes", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/clientes/3",
+              "host": ["http://localhost:3000"],
+              "path": ["clientes", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Empleados",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/empleados",
+              "host": ["http://localhost:3000"],
+              "path": ["empleados"]
+            }
+          }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/empleados/1",
+              "host": ["http://localhost:3000"],
+              "path": ["empleados", "1"]
+            }
+          }
+        },
+        {
+          "name": "Salarios por puesto",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/empleados/salarios-por-puesto",
+              "host": ["http://localhost:3000"],
+              "path": ["empleados", "salarios-por-puesto"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Carlos\",\"apellido\":\"López\",\"puesto\":\"Repartidor\",\"salario\":780000,\"fecha_ingreso\":\"2024-01-15\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/empleados",
+              "host": ["http://localhost:3000"],
+              "path": ["empleados"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Juan\",\"apellido\":\"Pérez\",\"puesto\":\"Vendedor Senior\",\"salario\":950000,\"fecha_ingreso\":\"2023-03-01\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/empleados/1",
+              "host": ["http://localhost:3000"],
+              "path": ["empleados", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar (baja lógica)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/empleados/3",
+              "host": ["http://localhost:3000"],
+              "path": ["empleados", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pedidos",
+      "item": [
+        {
+          "name": "Listar con JOIN",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/pedidos",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos"]
+            }
+          }
+        },
+        {
+          "name": "Filtrar por estado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/pedidos?estado=entregado",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos"],
+              "query": [{ "key": "estado", "value": "entregado" }]
+            }
+          }
+        },
+        {
+          "name": "Filtrar por cliente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/pedidos?id_cliente=1",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos"],
+              "query": [{ "key": "id_cliente", "value": "1" }]
+            }
+          }
+        },
+        {
+          "name": "Obtener con detalle",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/pedidos/1",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos", "1"]
+            }
+          }
+        },
+        {
+          "name": "Total por mes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/pedidos/total-por-mes",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos", "total-por-mes"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"fecha\":\"2025-06-10\",\"id_cliente\":1,\"id_empleado\":1,\"estado\":\"pendiente\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/pedidos",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos"]
+            }
+          }
+        },
+        {
+          "name": "Agregar detalle",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id_producto\":2,\"cantidad\":5,\"precio_unitario\":1200}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/pedidos/1/detalle",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos", "1", "detalle"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"fecha\":\"2025-06-05\",\"id_cliente\":2,\"id_empleado\":2,\"estado\":\"entregado\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/pedidos/2",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos", "2"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/pedidos/3",
+              "host": ["http://localhost:3000"],
+              "path": ["pedidos", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Facturas",
+      "item": [
+        {
+          "name": "Listar con JOIN",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/facturas",
+              "host": ["http://localhost:3000"],
+              "path": ["facturas"]
+            }
+          }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/facturas/1",
+              "host": ["http://localhost:3000"],
+              "path": ["facturas", "1"]
+            }
+          }
+        },
+        {
+          "name": "IVA por mes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/facturas/iva-por-mes",
+              "host": ["http://localhost:3000"],
+              "path": ["facturas", "iva-por-mes"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"numero\":\"A-0001-00000002\",\"fecha\":\"2025-06-05\",\"subtotal\":21000,\"iva\":4410,\"total\":25410,\"id_pedido\":2}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/facturas",
+              "host": ["http://localhost:3000"],
+              "path": ["facturas"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"numero\":\"A-0001-00000001\",\"fecha\":\"2025-06-01\",\"subtotal\":53000,\"iva\":11130,\"total\":64130,\"id_pedido\":1}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/facturas/1",
+              "host": ["http://localhost:3000"],
+              "path": ["facturas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/facturas/2",
+              "host": ["http://localhost:3000"],
+              "path": ["facturas", "2"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Companias",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/companias",
+              "host": ["http://localhost:3000"],
+              "path": ["companias"]
+            }
+          }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/companias/1",
+              "host": ["http://localhost:3000"],
+              "path": ["companias", "1"]
+            }
+          }
+        },
+        {
+          "name": "Envíos por compañía",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/companias/envios-por-compania",
+              "host": ["http://localhost:3000"],
+              "path": ["companias", "envios-por-compania"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"OCA\",\"telefono\":\"0800-999-9999\",\"costo_base\":3000}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/companias",
+              "host": ["http://localhost:3000"],
+              "path": ["companias"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nombre\":\"Andreani S.A.\",\"telefono\":\"0800-333-3333\",\"costo_base\":2700}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/companias/1",
+              "host": ["http://localhost:3000"],
+              "path": ["companias", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/companias/3",
+              "host": ["http://localhost:3000"],
+              "path": ["companias", "3"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Envios",
+      "item": [
+        {
+          "name": "Listar con JOIN",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/envios",
+              "host": ["http://localhost:3000"],
+              "path": ["envios"]
+            }
+          }
+        },
+        {
+          "name": "Obtener por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/envios/1",
+              "host": ["http://localhost:3000"],
+              "path": ["envios", "1"]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id_pedido\":2,\"id_compania\":1,\"direccion\":\"Calle Falsa 123\",\"fecha_envio\":\"2025-06-07\",\"estado\":\"preparando\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/envios",
+              "host": ["http://localhost:3000"],
+              "path": ["envios"]
+            }
+          }
+        },
+        {
+          "name": "Actualizar",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"id_pedido\":1,\"id_compania\":1,\"direccion\":\"Av. Corrientes 500\",\"fecha_envio\":\"2025-06-02\",\"estado\":\"entregado\"}"
+            },
+            "url": {
+              "raw": "http://localhost:3000/envios/1",
+              "host": ["http://localhost:3000"],
+              "path": ["envios", "1"]
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/envios/3",
+              "host": ["http://localhost:3000"],
+              "path": ["envios", "3"]
+            }
+          }
+        },
+        {
+          "name": "No existente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/envios/999",
+              "host": ["http://localhost:3000"],
+              "path": ["envios", "999"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

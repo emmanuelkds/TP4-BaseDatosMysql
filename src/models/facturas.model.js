@@ -53,7 +53,7 @@ export const ivaPorMes = async () => {
             SUM(iva) AS total_iva,
             SUM(total) AS total_facturado
      FROM facturas
-     GROUP BY mes
+     GROUP BY DATE_FORMAT(fecha, '%Y-%m')
      ORDER BY mes DESC`
   );
   return rows;
